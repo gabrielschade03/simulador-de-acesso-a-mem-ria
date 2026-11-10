@@ -9,12 +9,4 @@ Cada linha de `trace_*.in` contém um endereço virtual decimal. `saida_*.out` t
 
 Os deslocamentos são não nulos em parte dos acessos, para verificar que a página é calculada por divisão inteira pelo tamanho da página. `generate_traces.py` recria os dois arquivos de entrada sem aleatoriedade.
 
-Executar todos os testes, incluindo o trace original de 8.043.008 acessos:
-
-```sh
-python3 -m unittest discover -s tests -v
-```
-
-A suíte executa cada trace adicional nas duas políticas com os parâmetros da tabela. Para executar o exemplo original separadamente, use `python3 main.py` na raiz do projeto.
-
-A suíte também confirma que uma política de substituição inválida é rejeitada com `ValueError` e que a TLB continua usando LRU mesmo quando os frames usam SecondChance.
+Para executar o trace original, use `python3 main.py` na raiz do projeto; a saída deve coincidir com `saidaesperada.in`. Para executar um trace adicional, altere em `main.py` o arquivo de entrada e os parâmetros do construtor conforme a tabela acima (`rep_policy='LRU'` ou `rep_policy='SecondChance'`) e compare a saída com o arquivo `saida_<trace>_<política>.out` correspondente.
